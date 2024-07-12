@@ -2,6 +2,7 @@ package main
 
 import (
 	"encoding/json"
+	"log"
 	"math/rand"
 	"net/http"
 	"strings"
@@ -37,7 +38,8 @@ func newGame(w http.ResponseWriter, r *http.Request) {
 	createdGame := createdGames[0]
 
 	createdGame.ID = extractRealID(createdGame.ID)
-	// createdGame.Numbers = nil
+	log.Println("Number for game " + createdGame.ID + " are: " + createdGame.Numbers[0] + ", " + createdGame.Numbers[1])
+	createdGame.Numbers = nil
 
 	jsonGame, err := json.Marshal(createdGame)
 	if err != nil {
