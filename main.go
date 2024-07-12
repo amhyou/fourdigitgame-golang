@@ -40,5 +40,5 @@ func main() {
 	initDB()
 	http.HandleFunc("/start", startGame)
 	http.HandleFunc("/new", newGame)
-	log.Fatal(http.ListenAndServe(":8000", nil))
+	log.Fatal(http.ListenAndServe(":5000", nil))
 }

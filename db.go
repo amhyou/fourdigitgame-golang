@@ -6,7 +6,7 @@ import (
 
 func initDB() {
 	var err error
-	db, err = surrealdb.New("ws://localhost:8001/rpc")
+	db, err = surrealdb.New("ws://localhost:8000/rpc")
 	if err != nil {
 		panic(err)
 	}
