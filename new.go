@@ -24,18 +24,23 @@ func newGame(w http.ResponseWriter, r *http.Request) {
 
 	// Create new game
 	data, err := db.Create("games", game)
+	log.Println(data)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
 
-	createdGames := make([]Game, 1)
-	err = surrealdb.Unmarshal(data, &createdGames)
+	log.Println("game created")
+
+	createdGame := new(Game)
+	err = surrealdb.Unmarshal(data, &createdGame)
+	log.Println(createdGame)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
-	createdGame := createdGames[0]
+
+	log.Println("game unmarsheled")
 
 	createdGame.ID = extractRealID(createdGame.ID)
 	log.Println("Number for game " + createdGame.ID + " are: " + createdGame.Numbers[0] + ", " + createdGame.Numbers[1])
